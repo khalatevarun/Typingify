@@ -16,6 +16,12 @@ async function getNextQuote() {
 async function renderNewQuote() {
   const quote = await getRandomQuote();
   quoteDisplayElement.innerText = quote;
+  quote.split('').forEach((character) => {
+    const charaterSpan = document.createElement('span');
+    charaterSpan.classList.add('correct');
+    charaterSpan.innerText = character;
+    quoteDisplayElement.appendChild(charaterSpan);
+  });
   quoteInputElement.value = null;
 }
 renderNewQuote();
