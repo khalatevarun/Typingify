@@ -58,6 +58,15 @@ li {
   max-width: 90%;
 }
 
+.stats-container {
+  width: 200px;
+}
+.about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .timer {
   position: absolute;
   top: 2rem;
@@ -71,6 +80,12 @@ li {
   margin-left: calc(1rem + 2px);
   margin-right: calc(1rem + 2px);
   color: grey;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .quote-input {
@@ -113,6 +128,9 @@ th {
   padding: 8px;
 }
 
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 tr:nth-child(odd) {
   background-color: white;
 }

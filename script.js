@@ -21,8 +21,14 @@ let errors = 0;
 let mode = 1;
 let totalWords = 0;
 let accuracy = 0;
+let intervalID;
+let gameStatus = 0;
 
 quoteInputElement.addEventListener('input', (e) => {
+  if (totalCharacters === 0) {
+    startTimer();
+    gameStatus = 1;
+  }
   console.log('Characters typed is>>>>>', totalCharacters);
   const arrayQuote = quoteDisplayElement.querySelectorAll('span');
   const arrayValue = quoteInputElement.value.split('');
@@ -99,62 +105,78 @@ quoteInputElement.addEventListener('keydown', function (e) {
     e.preventDefault();
   }
   if (e.key === 'Enter') {
-    stopTest();
+    e.preventDefault();
+    toggleTest();
   }
   if (e.key === 'Escape') {
+    e.preventDefault();
+    gameStatus = 0;
     restartTest();
   }
   console.log('key pressed>>>', e);
 });
 
-function stopTest() {
+function toggleTest() {
   // stop only if one minute is passed else show alert
   //first add the current stats to an array of objects to display it later in the stats
   // reset everything to 0 and show on the website
-  if (duration > 1) {
-    tableElement.innerHTML +=
-      `<tr>
+
+  if (gameStatus === 1) {
+    if (duration > 10) {
+      tableElement.innerHTML +=
+        `<tr>
     <td>` +
-      cpm +
-      `</td>
+        cpm +
+        `</td>
     <td>` +
-      wpm +
-      `</td>
+        wpm +
+        `</td>
     <td>` +
-      accuracy +
-      `</td>
+        accuracy +
+        `</td>
     <td>` +
-      errors +
-      `</td>
+        errors +
+        `</td>
     <td>` +
-      totalWords +
-      `</td>
+        totalWords +
+        `</td>
     <td>` +
-      duration +
-      `</td>
+        duration +
+        `</td>
   </tr>`;
 
-    wpm = 0;
-    cpm = 0;
-    duration = 0;
-    words = 0;
-    errors = 0;
-    accuracy = 0;
-    timerElement.innerText = 0;
-    wpmElement.innerText = 0;
-    cpmElement.innerText = 0;
-    errorsElement.innerText = 0;
-    accuracyElement.innerText = 0;
-    totalwordsElement.innerText = 0;
-  } else {
-    alert(
-      'You need to atleast type for a duaration of 1min (60 seconds) in order to record the current score. Press escape to exit.'
-    );
+      restartTest();
+    } else {
+      alert(
+        'You need to atleast type for a duaration of 1min (60 seconds) in order to record the current score. Press escape to exit.'
+      );
+    }
   }
 }
 
 function restartTest() {
   // reset everything to 0 and do not add these stats to the records
+  wpm = 0;
+  totalCharacters = 0;
+  correctCharacters = 0;
+  cpm = 0;
+  startTime;
+  duration = 0;
+  quoteIndex = 0;
+  currentQuote = [];
+  errors = 0;
+  totalWords = 0;
+  accuracy = 0;
+  intervalID;
+  gameStatus = 0;
+  timerElement.innerText = 0;
+  wpmElement.innerText = 0;
+  cpmElement.innerText = 0;
+  errorsElement.innerText = 0;
+  accuracyElement.innerText = 0;
+  totalwordsElement.innerText = 0;
+  clearInterval(intervalID);
+  renderNewQuote();
 }
 
 async function getNextQuote() {
@@ -182,7 +204,7 @@ async function renderNewQuote() {
 function startTimer() {
   timerElement.innerText = 0;
   startTime = new Date();
-  setInterval(() => {
+  intervalID = setInterval(() => {
     timer.innerText = `${getTimerTime()}s`;
   }, 1000);
 }
@@ -191,5 +213,5 @@ function getTimerTime() {
   duration = Math.floor((new Date() - startTime) / 1000);
   return duration;
 }
-startTimer();
+
 renderNewQuote();
