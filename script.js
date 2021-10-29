@@ -7,6 +7,7 @@ const cpmElement = document.getElementById('cpm');
 const errorsElement = document.getElementById('errors');
 const accuracyElement = document.getElementById('accuracy');
 const totalwordsElement = document.getElementById('totalwords');
+const tableElement = document.getElementById('stats-list');
 
 let wpm = 0;
 let totalCharacters = 0;
@@ -20,16 +21,6 @@ let errors = 0;
 let mode = 1;
 let totalWords = 0;
 let accuracy = 0;
-
-const records = [];
-const singleRecord = {
-  wpm: 0,
-  cpm: 0,
-  duration: 0,
-  words: 0,
-  errors: 0,
-  accuracy: 0,
-};
 
 quoteInputElement.addEventListener('input', (e) => {
   console.log('Characters typed is>>>>>', totalCharacters);
@@ -107,8 +98,11 @@ quoteInputElement.addEventListener('keydown', function (e) {
   if (e.key === 'Backspace') {
     e.preventDefault();
   }
-  if (e.key === 'Escape') {
+  if (e.key === 'Enter') {
     stopTest();
+  }
+  if (e.key === 'Escape') {
+    restartTest();
   }
   console.log('key pressed>>>', e);
 });
@@ -118,14 +112,27 @@ function stopTest() {
   //first add the current stats to an array of objects to display it later in the stats
   // reset everything to 0 and show on the website
   if (duration > 1) {
-    records.push({
-      wpm: wpm,
-      cpm: cpm,
-      duration: duration,
-      words: totalWords,
-      errors: errors,
-      accuracy: accuracy,
-    });
+    tableElement.innerHTML +=
+      `<tr>
+    <td>` +
+      cpm +
+      `</td>
+    <td>` +
+      wpm +
+      `</td>
+    <td>` +
+      accuracy +
+      `</td>
+    <td>` +
+      errors +
+      `</td>
+    <td>` +
+      totalWords +
+      `</td>
+    <td>` +
+      duration +
+      `</td>
+  </tr>`;
 
     wpm = 0;
     cpm = 0;
@@ -134,13 +141,16 @@ function stopTest() {
     errors = 0;
     accuracy = 0;
     timerElement.innerText = 0;
-    wpmElement.innerText = wpm;
-    cpmElement.innerText = cpm;
-    errorsElement.innerText = errors;
-    accuracyElement.innerText = accuracy;
-    totalwordsElement.innerText = words;
+    wpmElement.innerText = 0;
+    cpmElement.innerText = 0;
+    errorsElement.innerText = 0;
+    accuracyElement.innerText = 0;
+    totalwordsElement.innerText = 0;
+  } else {
+    alert(
+      'You need to atleast type for a duaration of 1min (60 seconds) in order to record the current score. Press escape to exit.'
+    );
   }
-  console.log('RECORDS ARES>>>>>>', records);
 }
 
 function restartTest() {
