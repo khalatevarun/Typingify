@@ -19,6 +19,13 @@ body,
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 150px;
+  align-items: center;
+}
+
+.header-name {
   text-align: center;
   font-size: 56px;
   color: #ffff;
@@ -61,11 +68,6 @@ li {
 .stats-container {
   width: 200px;
 }
-.about-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .timer {
   position: absolute;
@@ -73,6 +75,22 @@ li {
   font-size: 3rem;
   color: white;
   font-weight: bold;
+}
+
+.mode-button {
+  padding: 4px 11px;
+  margin: 10px 0px;
+  background: #55c5ff;
+  border-radius: 4px;
+  color: black;
+  font-size: 16px;
+}
+
+.mode-button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
 
 .quote-display {

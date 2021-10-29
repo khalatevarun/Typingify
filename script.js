@@ -8,6 +8,7 @@ const errorsElement = document.getElementById('errors');
 const accuracyElement = document.getElementById('accuracy');
 const totalwordsElement = document.getElementById('totalwords');
 const tableElement = document.getElementById('stats-list');
+const modeElement = document.getElementById('mode');
 
 let wpm = 0;
 let totalCharacters = 0;
@@ -18,17 +19,30 @@ let duration = 0;
 let quoteIndex = 0;
 let currentQuote = [];
 let errors = 0;
-let mode = 1;
+let mode = 0;
 let totalWords = 0;
 let accuracy = 0;
 let intervalID;
 let gameStatus = 0;
+
+modeElement.addEventListener('click', function () {
+  if (mode == 0) {
+    modeElement.innerHTML = 'Mode: Easy';
+    mode = 1;
+    renderNewQuote();
+  } else {
+    modeElement.innerHTML = 'Mode: Difficult';
+    mode = 0;
+    renderNewQuote();
+  }
+});
 
 quoteInputElement.addEventListener('input', (e) => {
   if (totalCharacters === 0) {
     startTimer();
     gameStatus = 1;
   }
+  modeElement.disabled = true;
   console.log('Characters typed is>>>>>', totalCharacters);
   const arrayQuote = quoteDisplayElement.querySelectorAll('span');
   const arrayValue = quoteInputElement.value.split('');
@@ -96,11 +110,6 @@ function getRandomQuote() {
 }
 
 quoteInputElement.addEventListener('keydown', function (e) {
-  /*
-   * keyCode: 8
-   * keyIdentifier: "U+0008"
-   */
-
   if (e.key === 'Backspace') {
     e.preventDefault();
   }
@@ -113,14 +122,13 @@ quoteInputElement.addEventListener('keydown', function (e) {
     gameStatus = 0;
     restartTest();
   }
+  if (e.key.includes('Arrow')) {
+    e.preventDefault();
+  }
   console.log('key pressed>>>', e);
 });
 
 function toggleTest() {
-  // stop only if one minute is passed else show alert
-  //first add the current stats to an array of objects to display it later in the stats
-  // reset everything to 0 and show on the website
-
   if (gameStatus === 1) {
     if (duration > 10) {
       tableElement.innerHTML +=
@@ -169,6 +177,7 @@ function restartTest() {
   accuracy = 0;
   intervalID;
   gameStatus = 0;
+  modeElement.disabled = false;
   timerElement.innerText = 0;
   wpmElement.innerText = 0;
   cpmElement.innerText = 0;

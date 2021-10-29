@@ -10,7 +10,11 @@
     <title>Typingify</title>
 </head>
 <body>
-   <div class="header">Typingify</div>
+    <div class="header">
+    <div>Rules and Tips</div>
+   <div class="header-name">Typingify</div>
+   <div>Your scores</div>
+</div>
  <div class="parent-container">
      <div class="stats-container">   <ul>
         <li><div class="stats-label">Words</div><div class="stats-value" id="totalwords">0</div></li>
@@ -20,6 +24,9 @@
  <div class="main-container">
      <div class="quote-display" id="quoteDisplay"></div>
      <textarea id="quoteInput" class="quote-input" autofocus></textarea>
+     <div style="text-align: end;">
+     <button class="mode-button" id="mode">Mode: Difficult</button>
+    </div>
  </div>
  <div class="stats-container">
      <ul>
@@ -30,6 +37,7 @@
  </div>
 </div>
 <div class="stats-table">
+    <div>Your scores</div>
     <table id="stats-list">
         <tr>
           <th>CPM</th>
@@ -44,9 +52,12 @@
       </table>
 </div>
 <div class="about-container">
-    <p>About Typingify</p>
-    <p>Typingify is a website to test your typing skills.</p>
-    <p>This is how the paramteres are calculated:</p>
+    <p>Rules and tips</p>
+    
+    <p>The timer starts as soon as you start typing in the text area.</p>
+    <p>To stop the current recording, press 'Enter' and the score will recored in the table.</p>
+    <p>To restart the recording, press 'Escape' and the parameters will be set back to inital values.</p>
+    <p>You can't copy the text displayed nor can you move the cursor using arrow keys</p>
     <div>
     <p><strong>Words</strong> = Total Characters Typed / 5</p>
     <p><strong>Errors</strong> = No. of Incorrect Characters Typed</p>
