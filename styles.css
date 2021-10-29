@@ -9,6 +9,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background-color: #55c5ff;
+  scroll-behavior: smooth;
 }
 
 body,
@@ -56,17 +57,40 @@ li {
   justify-content: space-evenly;
   align-items: center;
 }
+.home-container {
+  height: 100vh;
+}
 
 .main-container {
   background-color: white;
   padding: 1rem;
   border-radius: 0.5rem;
   width: 700px;
-  max-width: 90%;
+}
+
+.about-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formula-container {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  width: 60%;
 }
 
 .stats-container {
   width: 200px;
+}
+
+.rules-container {
+  width: 75%;
 }
 
 .timer {
@@ -75,6 +99,14 @@ li {
   font-size: 3rem;
   color: white;
   font-weight: bold;
+}
+
+.header-links {
+  color: white;
+  border: 2px solid white;
+  padding: 4px 11px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .mode-button {
@@ -156,4 +188,5 @@ tr:nth-child(odd) {
 .stats-table {
   margin-left: auto;
   margin-right: auto;
+  height: 100vh;
 }

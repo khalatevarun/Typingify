@@ -9,6 +9,10 @@ const accuracyElement = document.getElementById('accuracy');
 const totalwordsElement = document.getElementById('totalwords');
 const tableElement = document.getElementById('stats-list');
 const modeElement = document.getElementById('mode');
+const rulesContainter = document.getElementById('rulesContainer');
+const scoresContainer = document.getElementById('scoresContainer');
+const rulesLink = document.getElementById('rulesLink');
+const scoresLink = document.getElementById('scoresLink');
 
 let wpm = 0;
 let totalCharacters = 0;
@@ -24,6 +28,13 @@ let totalWords = 0;
 let accuracy = 0;
 let intervalID;
 let gameStatus = 0;
+
+rulesLink.addEventListener('click', function () {
+  rulesContainter.scrollIntoView({ behavior: 'smooth' });
+});
+scoresLink.addEventListener('click', function () {
+  scoresContainer.scrollIntoView({ behavior: 'smooth' });
+});
 
 modeElement.addEventListener('click', function () {
   if (mode == 0) {
