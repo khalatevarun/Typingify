@@ -8,7 +8,14 @@ body {
 
   min-height: 100vh;
   margin: 0;
-  background-color: #55c5ff;
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
   scroll-behavior: smooth;
 }
 
@@ -91,6 +98,7 @@ li {
 
 .rules-container {
   width: 75%;
+  color: white;
 }
 
 .timer {
